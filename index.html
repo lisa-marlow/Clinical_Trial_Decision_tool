@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Is my project a Clinical Trial? (SCU Decision Tool)</title>
+  <style>
+    :root { --max: 920px; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; line-height: 1.45; background: #fafafa; color: #111; }
+    header { background: #fff; border-bottom: 1px solid #e6e6e6; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 18px 16px; }
+    h1 { margin: 0 0 6px 0; font-size: 1.35rem; }
+    .subtle { color: #444; margin: 0.2rem 0 0 0; }
+    .card { background: #fff; border: 1px solid #e6e6e6; border-radius: 12px; padding: 16px; box-shadow: 0 1px 0 rgba(0,0,0,0.03); }
+    .stack { display: grid; gap: 12px; }
+    .pill { display: inline-block; padding: 2px 10px; border: 1px solid #e6e6e6; border-radius: 999px; font-size: 0.85rem; background: #fff; color: #333; }
+    .btnrow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    button { border: 1px solid #d0d0d0; background: #fff; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-size: 1rem; }
+    button:hover { background: #f5f5f5; }
+    button.primary { border-color: #bcbcbc; font-weight: 600; }
+    .small { font-size: 0.92rem; }
+    .muted { color: #555; }
+    details { border: 1px dashed #d8d8d8; border-radius: 10px; padding: 10px 12px; background: #fcfcfc; }
+    details summary { cursor: pointer; font-weight: 600; }
+    .hr { border-top: 1px solid #eee; margin: 12px 0; }
+    .breadcrumb { font-size: 0.9rem; color: #555; }
+    .breadcrumb span { display: inline-block; margin-right: 6px; }
+    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; }
+    .toolbar button { font-size: 0.92rem; padding: 8px 10px; }
+    .outcomeTitle { font-size: 1.15rem; margin: 0 0 8px 0; }
+    .tag { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 0.85rem; border: 1px solid #e6e6e6; background: #fff; }
+    ul { margin: 8px 0 0 18px; }
+    .disclaimer { font-size: 0.9rem; color: #444; }
+    .footer { color: #666; font-size: 0.9rem; }
+    code.kbd { background: #f3f3f3; padding: 2px 6px; border-radius: 6px; border: 1px solid #e6e6e6; }
+    .helpBlock > *:first-child { margin-top: 8px; }
+    .helpBlock p { margin: 8px 0 0 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <h1>Is my project a Clinical Trial? (Decision & Governance Tool)</h1>
+      <p class="subtle small">Educational decision support for SCU researchers and staff.</p>
+      <p class="subtle small">Version 0.1 — March 2026</p>	
+    </div>
+  </header>
+
+  <main class="wrap stack" aria-live="polite">
+    <div class="card stack" id="introCard">
+      <div>
+        <span class="pill">Start here</span>
+        <h2 style="margin:10px 0 6px 0; font-size:1.15rem;">What is a clinical trial?</h2>
+        <p class="small" style="margin:0;">
+          Southern Cross University has adopted the <a href="https://www.who.int/health-topics/clinical-trials#tab=tab_1" target="_blank" rel="noopener noreferrer">World Health Organization (WHO)</a> definition of a clinical trial as:
+        </p>
+        <p class="small" style="margin:10px 0 0 0;">
+          <strong>“Any research study that prospectively assigns human participants or groups of humans to one or more health-related interventions to evaluate the effects on health outcomes.”</strong>
+        </p>
+        <p class="small muted" style="margin:10px 0 0 0;">
+          Research that introduces a change for participants, such as: a training program; behavioural intervention; education initiative; exercise program; digital tool; model of care; or clinical procedure, may meet this definition.
+        </p>
+
+        <details style="margin-top:12px;">
+          <summary>Important note about “small studies”</summary>
+          <div class="small muted helpBlock">
+            <p>
+              The <strong>size</strong> of the study (pilot, small <em>n</em>, researcher-led, or student project) does <strong>not</strong> determine whether it is a clinical trial.
+              What matters is whether participants are <strong>prospectively assigned</strong> to a <strong>health-related intervention</strong> to evaluate effects on <strong>health outcomes</strong>.
+            </p>
+          </div>
+        </details>
+
+        <details style="margin-top:12px;">
+          <summary>What counts as a health-related intervention?</summary>
+          <div class="small muted helpBlock">
+            <p><strong>A health-related intervention is anything introduced as part of the research to influence a health outcome. Examples include:</strong></p>
+            <ul>
+              <li>Medicines</li>
+              <li>Vaccines</li>
+              <li>Biological products</li>
+              <li>Herbal and natural supplements or products</li>
+              <li>Devices</li>
+              <li>Surgical procedures</li>
+              <li>Psychotherapeutic and behavioural treatments</li>
+              <li>Dietary interventions</li>
+              <li>Exercise programs</li>
+              <li>Education programs</li>
+              <li>Diagnostic strategies</li>
+              <li>
+                Process-of-care and system changes, including:
+                <ul>
+                  <li>Health-related preventative care strategies</li>
+                  <li>Health-related education interventions</li>
+                  <li>Delivery system changes (e.g., telehealth or online tools)</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </details>
+
+        <details style="margin-top:12px;">
+          <summary>What counts as a health outcome?</summary>
+          <div class="small muted helpBlock">
+            <p>
+              Health outcomes are biomedical or health-related measures used to evaluate the effect of an intervention. Examples include:
+            </p>
+            <ul>
+              <li>Physiological, biological, or psychological measures</li>
+              <li>Changes in symptoms</li>
+              <li>Disease progression or remission</li>
+              <li>Health-related behaviours</li>
+              <li>Quality of life</li>
+              <li>Pharmacokinetic or pharmacodynamic measures</li>
+              <li>Safety outcomes (including adverse events)</li>
+            </ul>
+          </div>
+        </details>
+
+        <p class="small" style="margin:14px 0 0 0;">
+          Use this tool to determine <em>whether</em> your project meets the definition of a clinical trial and, if so, what additional steps may be required.
+        </p>
+
+        <div class="btnrow">
+          <button class="primary" id="startBtn">Start the decision tool</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card stack" id="toolCard" style="display:none;">
+      <div class="toolbar">
+        <button id="backBtn" title="Go back one step">Back</button>
+        <button id="restartBtn" title="Restart the tool">Restart</button>
+      </div>
+
+      <div class="breadcrumb" id="breadcrumb"></div>
+
+      <div class="hr"></div>
+
+      <div id="nodeArea" class="stack"></div>
+    </div>
+
+    <div class="footer">
+      <p class="disclaimer">
+        <strong>Need advice?</strong> If you are unsure at any stage, please contact SCU's
+        <a href="https://www.scu.edu.au/about/contacts/directory/129086/" target="_blank" rel="noopener noreferrer">Clinical Trials expert</a>
+        or the Human Research Ethics Office at
+        <a href="mailto:human.ethics@scu.edu.au">human.ethics@scu.edu.au</a>.
+        Early clarification helps prevent delays later.
+      </p>
+    </div>
+  </main>
+
+<script>
+/* ===== Shared links used in the Governance Decision tree ===== */
+const ETHICS_EMAIL_LINK = `<a href="mailto:human.ethics@scu.edu.au">Human Research Ethics Office</a>`;
+
+const ARTG_SEARCH_LINK = `<a href="https://www.tga.gov.au/products/regulations-all-products/about-australian-register-therapeutic-goods-artg/searching-australian-register-therapeutic-goods-artg" target="_blank" rel="noopener noreferrer">Australian Register of Therapeutic Goods (ARTG)</a>`;
+
+const ARTG_SHORT_LINK = `<a href="https://www.tga.gov.au/products/regulations-all-products/about-australian-register-therapeutic-goods-artg/searching-australian-register-therapeutic-goods-artg" target="_blank" rel="noopener noreferrer">ARTG</a>`;
+
+const CTN_CTA_LINK = `<a href="https://www.tga.gov.au/products/unapproved-therapeutic-goods/access-pathways/clinical-trials/how-we-regulate-australian-clinical-trials-use-unapproved-therapeutic-goods" target="_blank" rel="noopener noreferrer">Clinical Trial Notification (CTN) or Clinical Trial Approval (CTA)</a>`;
+
+const TREE = {
+  start: "N0",
+  nodes: {
+    N0: {
+      title: "Pre-screen — Human participants or groups of human participants",
+      question: "Does your research involve human participants or groups of human participants?",
+      help: [
+        "This is a pre-screen only.",
+        "A study cannot be a clinical trial under the WHO definition unless it involves human participants or groups of humans.",
+        "If the answer is no, the project is not a clinical trial for the purposes of this tool."
+      ],
+      answers: [
+        { label: "Yes", next: "N1" },
+        { label: "No", next: "O_NOT_CT" }
+      ]
+    },
+
+    N1: {
+      title: "Step 1 — Prospective assignment",
+      question: "Will participants (or groups) be prospectively assigned to receive one or more interventions according to the research design (that is, does the <em>research protocol</em> determine who receives the intervention)?",
+      help: [
+`<p><strong>What “prospectively assigned” means</strong></p>
+<p>
+Participants (or groups) are <em>prospectively assigned</em> when the <em>research protocol</em> determines who receives the intervention, rather than usual care or routine practice.
+</p>
+
+<p>Common ways assignment occurs include:</p>
+<ul>
+<li>Randomisation</li>
+<li>Allocation by group or cluster</li>
+<li>Crossover designs</li>
+<li>Stepped-wedge or staged rollout designs</li>
+</ul>
+
+<p><strong>What is <em>not</em> prospective assignment</strong></p>
+<ul>
+<li>Observing existing clinical practice without determining who receives the intervention.</li>
+<li>Studying the effects of a change that was introduced independently of the research.</li>
+</ul>
+
+<p><strong>Important note</strong></p>
+<p>
+There may be only a single intervention with no control arm.
+If participants receive the intervention <em>because they are enrolled in the study</em>, this still counts as prospective assignment.
+</p>
+
+<p><strong>Examples</strong></p>
+<ul>
+<li>Recording patient outcomes after clinicians choose between treatments as part of usual care is <strong>not a clinical trial</strong> if the researchers do not determine which treatment patients receive.</li>
+<li>Providing a new program (e.g. psychological, exercise, educational) only to people who enrol in the study and measuring their health outcomes <strong>is a clinical trial</strong>.</li>
+<li>Observing the effects of a hospital policy change introduced outside the research study is <strong>not a clinical trial</strong> if the study does not determine who receives the intervention.</li>
+<li>Randomising clinicians to receive different training programs and measuring patient health outcomes <strong>is a clinical trial</strong>.</li>
+<li>Introducing a new care pathway to hospital wards at different times according to a research schedule and comparing patient outcomes <strong>is a clinical trial</strong>.</li>
+</ul>`,
+        "If you are unsure, choose the ‘Unsure’ option and seek advice."
+      ],
+      answers: [
+        { label: "Yes", next: "N2" },
+        { label: "No", next: "O_NOT_CT" },
+        { label: "Unsure / need advice", next: "O_SEEK_ADVICE" }
+      ]
+    },
+
+    N2: {
+      title: "Step 2 — Health-related intervention",
+      question: "Is at least one of the interventions health-related? An intervention does not have to be a medicine or device to be health-related.",
+      help: [
+`<p><strong>Health-related interventions include:</strong></p>
+<ul>
+  <li>Medicines</li>
+  <li>Vaccines</li>
+  <li>Biological products</li>
+  <li>Herbal and natural supplements or products</li>
+  <li>Devices</li>
+  <li>Surgical procedures</li>
+  <li>Psychotherapeutic and behavioural treatments</li>
+  <li>Dietary interventions</li>
+  <li>Exercise programs</li>
+  <li>Education programs</li>
+  <li>Diagnostic strategies</li>
+  <li>
+    Process-of-care and system changes, including:
+    <ul>
+      <li>Health-related preventative care strategies</li>
+      <li>Health-related education interventions</li>
+      <li>Delivery system changes (e.g., telehealth or online tools)</li>
+    </ul>
+  </li>
+</ul>`
+      ],
+      answers: [
+        { label: "Yes", next: "N3" },
+        { label: "No", next: "O_NOT_CT" },
+        { label: "Unsure / need advice", next: "O_SEEK_ADVICE" }
+      ]
+    },
+
+    N3: {
+      title: "Step 3 — Health outcomes",
+      question: "Are you measuring health outcomes in order to evaluate the effect of the intervention?",
+      help: [
+`<p><strong>What counts as a health outcome?</strong></p>
+<p>
+Health outcomes are biomedical or health-related measures used to evaluate the effect of an intervention.
+Examples include:
+</p>
+<ul>
+  <li>Physiological, biological, or psychological measures</li>
+  <li>Symptoms</li>
+  <li>Disease progression or remission</li>
+  <li>Health-related behaviours</li>
+  <li>Quality of life</li>
+  <li>Pharmacokinetic measures</li>
+  <li>Safety outcomes, including adverse events</li>
+</ul>
+
+<p><strong>The key question</strong></p>
+<p>
+It is not enough that a health outcome is measured somewhere in the study.
+The question is whether the health outcome is being measured <em>in order to evaluate the effect of the intervention</em>.
+</p>
+
+<p><strong>Clarification about provider-level studies</strong></p>
+<p>
+Some studies assign health care or other service <em>providers</em> (rather than patients or service recipients) to intervention and comparison groups:
+</p>
+<ul>
+  <li>If the purpose of the research is to examine the effect of the intervention on the health outcomes of the providers’ patients, this <strong>is considered a clinical trial</strong>.</li>
+  <li>If the purpose of the research is to examine the effect only on the providers themselves (for example, their knowledge or attitudes), this <strong>is not considered a clinical trial</strong>.</li>
+</ul>
+
+<p><strong>Important note</strong></p>
+<p>
+The target population does not need to have a health condition.
+The only relevant question is whether the study measures health-related outcomes in order to evaluate the effect of the intervention.
+</p>`,
+        "If no one’s health outcomes are being measured to evaluate the effect of the intervention, it is not a clinical trial."
+      ],
+      answers: [
+        { label: "Yes", next: "O_CT" },
+        { label: "No", next: "O_NOT_CT" },
+        { label: "Unsure / need advice", next: "O_SEEK_ADVICE" }
+      ]
+    },
+
+    G1: {
+      title: "Governance — therapeutic goods",
+      question: "Does the clinical trial involve a therapeutic good (e.g. a medicine or biological product, a medical device, or software used as a medical device)?",
+      help: [
+`<ul>
+<li>See <a href="https://www.tga.gov.au/products/regulations-all-products/regulation-essentials/what-are-therapeutic-goods" target="_blank" rel="noopener noreferrer">What are 'therapeutic goods'?</a></li>
+<li>If a therapeutic good is involved, additional regulatory and governance requirements may apply.</li>
+<li>Therapeutic goods may be used in clinical trials (or other research) either as the intervention itself or as a tool used to measure outcomes. For example, an app or device that makes a medical diagnosis based on a participant’s heartbeat, or a device that measures skin temperature.</li>
+<li>A project can be a clinical trial even if it does not involve a therapeutic good (for example, behavioural or educational interventions).</li>
+</ul>`
+      ],
+      answers: [
+        { label: "Yes", next: "G2" },
+	{ label: "No", next: "O_CT_NON_THERAPEUTIC" },
+        { label: "Unsure / need advice", next: "O_CT_THERAPEUTIC_ADVICE" }
+      ]
+    },
+
+    G2: {
+      title: "Governance — therapeutic good regulatory status",
+      question: `
+<p>Is the therapeutic good included on the ${ARTG_SEARCH_LINK}?</p>
+
+`,
+      help: [
+`<ul>
+<li>Many research studies use products that are not included on the ARTG, or that are used outside their ARTG listing.</li>
+<li>If a product is not included on the ARTG, or is being used outside its ARTG listing, additional regulatory or governance requirements may apply.</li>
+<li>This tool does not determine whether a ${CTN_CTA_LINK} pathway applies. It helps identify when regulatory advice from your Faculty advisers or the ${ETHICS_EMAIL_LINK} may be required.</li>
+</ul>`
+      ],
+      answers: [
+        { label: "Yes", next: "G3" },
+        { label: "No", next: "O_CT_THERAPEUTIC_HIGHER" },
+        { label: "Unsure / need advice", next: "O_CT_THERAPEUTIC_ADVICE" }
+      ]
+    },
+
+    G3: {
+      title: "Governance — additional regulatory indicators",
+      question: `
+<p>Do any of the following apply to the therapeutic good being studied?</p>
+
+<p><em>Selecting “Yes” does not mean the study cannot proceed. It simply indicates that additional regulatory or governance requirements may apply, and the research team may need to confirm the appropriate pathway.</em></p>
+
+<p><strong>Select “Yes” if any of the following apply:</strong></p>
+
+<ul>
+<li>The product is included on the ${ARTG_SEARCH_LINK}, but is being used outside its ARTG listing, for example:
+  <ul>
+    <li>from a different manufacturer</li>
+    <li>with a different formulation</li>
+    <li>for a different condition than listed on the ARTG</li>
+  </ul>
+</li>
+<li>The study is first-in-human</li>
+<li>The device is a prototype or significantly modified</li>
+<li>The study involves a combination of products that has not previously been approved or evaluated</li>
+<li>The dose or route of administration differs from the ARTG listing</li>
+<li>The study involves investigational software (SaMD), or device-like use outside its intended purpose</li>
+</ul>
+`,
+      help: [
+`<ul>
+<li>If none of these apply, the study may still require governance review, but it is less likely to involve additional therapeutic goods regulatory complexity.</li>
+<li>If you are unsure whether any of these apply, select <strong>“Unsure / need advice”</strong> for further guidance.</li>
+</ul>`
+      ],
+      answers: [
+        { label: "Yes — at least one applies", next: "G3_CONFIRM" },
+        { label: "No — none apply", next: "O_CT_THERAPEUTIC_LIKELY_CTN" },
+        { label: "Unsure / need advice", next: "O_CT_THERAPEUTIC_ADVICE" }
+      ]
+    },
+
+    G3_CONFIRM: {
+      title: "Governance — confirm additional regulatory indicators",
+      question: `
+<p>Please confirm that at least one of the following applies to the therapeutic good being studied:</p>
+
+<ul>
+<li>The product is being used outside its ${ARTG_SEARCH_LINK} listing</li>
+<li>The study is first-in-human</li>
+<li>The device is a prototype or significantly modified</li>
+<li>The study involves a combination of products that has not previously been approved or evaluated</li>
+<li>The dose or route of administration differs from the ARTG listing</li>
+<li>The study involves investigational software (SaMD), or device-like use outside its intended purpose</li>
+</ul>
+`,
+      help: [
+`<ul>
+<li>This confirmation step helps distinguish routine use of an ARTG-listed product from investigational or modified use that may require additional regulatory review.</li>
+<li>If you are unsure whether any of these apply, select <strong>“Unsure / need advice”</strong>.</li>
+</ul>`
+      ],
+      answers: [
+        { label: "Yes — confirm", next: "O_CT_THERAPEUTIC_HIGHER" },
+        { label: "No — go back", next: "G3" },
+        { label: "Unsure / need advice", next: "O_CT_THERAPEUTIC_ADVICE" }
+      ]
+    }
+  },
+
+  outcomes: {
+    O_NOT_CT: {
+      title: "Outcome — Not a clinical trial",
+      tag: "Not a clinical trial",
+      body: [
+        "Based on your responses, this project does not meet the WHO definition of a clinical trial.",
+        "Ethics review may still be required. Proceed via the standard SCU ethics pathway (e.g., Low Risk / HREC review as applicable).",
+        `If you remain unsure, especially where you are changing something about care, training, or delivery of services, contact the ${ETHICS_EMAIL_LINK} or your Faculty ADR for advice.`
+      ]
+    },
+
+    O_SEEK_ADVICE: {
+      title: "Outcome — Seek advice",
+      tag: "Advice needed",
+      body: [
+        "You have indicated uncertainty at a key decision point.",
+        `<strong>Please contact your Faculty adviser and/or the ${ETHICS_EMAIL_LINK}  with a short summary of:</strong>`
+      ],
+      bullets: [
+        "what participants or groups will receive (describe the intervention)",
+        "how allocation is decided (prospective assignment)",
+        "what health outcomes will be measured",
+        "whether those health outcomes are being measured to evaluate the effect of the intervention"
+      ]
+    },
+
+    O_CT: {
+      title: "Outcome — This is a clinical trial",
+      tag: "Clinical trial",
+      body: [
+        "Based on your responses, this project meets the WHO definition of a clinical trial.",
+        "The following questions relate to regulatory and governance requirements that apply to clinical trials at SCU."
+      ],
+      nextNode: "G1"
+    },
+
+    O_CT_NON_THERAPEUTIC: {
+      title: "Outcome — Clinical trial (non-therapeutic good)",
+      tag: "Clinical trial (non-therapeutic good)",
+      body: [
+        "This is a clinical trial, but it does not involve a therapeutic good (medicine/device).",
+        `<strong>Typical governance requirements include:</strong>`
+      ],
+      bullets: [
+        `<a href="https://www.scu.edu.au/research/human-research-ethics/applications-and-approvals/" target="_blank" rel="noopener noreferrer">Human Ethics review</a> (as a clinical trial; may be eligible for review under a non-HREC pathway).`,
+        `Trial registration on an appropriate public registry such as the <a href="https://www.anzctr.org.au/" target="_blank" rel="noopener noreferrer">Australian New Zealand Clinical Trials Registry (ANZCTR)</a>.`,
+        "Appropriate monitoring and reporting arrangements (including adverse event processes where relevant).",
+        "Insurance/indemnity arrangements as applicable (check SCU requirements).",
+        "Clinical trials must have a sponsor. If the research is conducted in Australia, the sponsor must be an Australian entity (i.e. it must have a current ABN)."
+      ],
+      body2: [
+        `If you remain unsure whether your intervention is a therapeutic good (e.g., an app or device-like tool), contact your Faculty ADR or the ${ETHICS_EMAIL_LINK}  for advice.`
+      ]
+    },
+
+    O_CT_THERAPEUTIC_LIKELY_CTN: {
+      title: "Outcome — Clinical trial involving a therapeutic good (likely CTN-type pathway)",
+      tag: "Clinical trial (therapeutic good)",
+      body: [
+        "This is a clinical trial involving a therapeutic good.",
+        `A <a href="https://www.tga.gov.au/products/unapproved-therapeutic-goods/access-pathways/clinical-trials/clinical-trial-notification-ctn-scheme" target="_blank" rel="noopener noreferrer">CTN-type (Clinical Trial Notification)</a> pathway is often used where products are lower-risk and regulatory evaluation is not required before trial commencement, but this must be confirmed via your Faculty ADR or the ${ETHICS_EMAIL_LINK} .`,
+`<strong>Typical governance requirements include:</strong>`,
+      ],
+      bullets: [
+        `<a href="https://www.scu.edu.au/research/human-research-ethics/applications-and-approvals/" target="_blank" rel="noopener noreferrer">HREC review</a> (as a clinical trial).`,
+        "Research Governance review / site authorisation (as applicable).",
+        "Confirm SCU sponsorship if appropriate.",
+        `Confirm CTN/CTA requirements with your Faculty ADR or the ${ETHICS_EMAIL_LINK} (do not self-classify if unsure).`,
+        "Insurance/indemnity and contracts (as applicable).",
+        `Trial registration on an appropriate public registry such as the <a href="https://www.anzctr.org.au/" target="_blank" rel="noopener noreferrer">Australian New Zealand Clinical Trials Registry (ANZCTR)</a>, where required or appropriate.`,
+        "Clinical trials must have a sponsor. If the research is conducted in Australia, the sponsor must be an Australian entity (i.e. it must have a current ABN)."
+      ]
+    },
+
+    O_CT_THERAPEUTIC_HIGHER: {
+      title: "Outcome — Clinical trial involving a therapeutic good (greater regulatory oversight likely)",
+      tag: "Clinical trial (higher oversight)",
+      body: [
+        "This is a clinical trial involving a therapeutic good likely to require additional regulatory oversight.",
+        `In rare cases a <a href="https://www.tga.gov.au/products/unapproved-therapeutic-goods/access-pathways/clinical-trials/review-clinical-trial-approval-cta-scheme" target="_blank" rel="noopener noreferrer">CTA-type (Clinical Trial Approval)</a> or other higher regulatory oversight may apply. Please contact your Faculty ADR or the ${ETHICS_EMAIL_LINK}  early.`,
+`<strong>Do not commence the trial until the relevant regulatory and governance requirements are confirmed. Typical governance requirements include:</strong>`,
+      ],
+      bullets: [
+        `<a href="https://www.scu.edu.au/research/human-research-ethics/applications-and-approvals/" target="_blank" rel="noopener noreferrer">HREC review</a> (as a clinical trial).`,
+        "Research Governance review / site authorisation (as applicable - processes are under development).",
+        `Confirm ${CTN_CTA_LINK} or other requirements with Faculty ADR or the ${ETHICS_EMAIL_LINK}.`,
+        "Insurance/indemnity and contracts (as applicable).",
+        `Trial registration on an appropriate public registry such as the <a href="https://www.anzctr.org.au/" target="_blank" rel="noopener noreferrer">Australian New Zealand Clinical Trials Registry (ANZCTR)</a>, where required or appropriate.`,
+        "Clinical trials must have a sponsor. If the research is conducted in Australia, the sponsor must be an Australian entity (i.e. it must have a current ABN)."
+      ]
+    },
+
+    O_CT_THERAPEUTIC_ADVICE: {
+      title: "Outcome — Clinical trial involving a therapeutic good (advice required)",
+      tag: "Clinical trial (advice needed)",
+      body: [
+        "This is a clinical trial and it likely involves a therapeutic good, but you have indicated uncertainty.",
+        `<strong>Please contact your Faculty ADR or the ${ETHICS_EMAIL_LINK} to confirm the appropriate regulatory pathway (e.g., Clinical Trial Notification) and governance requirements.</strong>`
+      ],
+      bullets: [
+        `Include details of the product (name, sponsor/manufacturer, and whether it is included on the ${ARTG_SHORT_LINK}, if known).`,
+        "Describe how it will be used (dose, route, modifications, intended purpose).",
+        "Describe the health outcomes being evaluated.",
+        "Clinical trials must have a sponsor. If the research is conducted in Australia, the sponsor must be an Australian entity (i.e. it must have a current ABN)."
+      ]
+    }
+  }
+};
+
+let history = [];
+let currentId = null;
+
+const introCard = document.getElementById("introCard");
+const toolCard = document.getElementById("toolCard");
+const startBtn = document.getElementById("startBtn");
+const nodeArea = document.getElementById("nodeArea");
+const backBtn = document.getElementById("backBtn");
+const restartBtn = document.getElementById("restartBtn");
+const breadcrumb = document.getElementById("breadcrumb");
+
+function isOutcome(id) {
+  return Boolean(TREE.outcomes[id]);
+}
+
+function getThing(id) {
+  return TREE.nodes[id] || TREE.outcomes[id];
+}
+
+function setBreadcrumb() {
+  if (!history.length) {
+    breadcrumb.innerHTML = "";
+    return;
+  }
+  const labels = history.map(id => {
+    const t = getThing(id);
+    return (t && (t.title || id)) ? (t.title || id) : id;
+  });
+  breadcrumb.innerHTML = `<span><strong>Path:</strong></span>` + labels.map(l => `<span>› ${escapeHtml(l)}</span>`).join("");
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, s => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#039;"
+  }[s]));
+}
+
+function render(id) {
+  currentId = id;
+  nodeArea.innerHTML = "";
+  setBreadcrumb();
+
+  if (isOutcome(id)) {
+    renderOutcome(id);
+    return;
+  }
+  renderNode(id);
+}
+
+function renderNode(id) {
+  const n = TREE.nodes[id];
+  const box = document.createElement("div");
+  box.className = "stack";
+
+  const h = document.createElement("div");
+  h.innerHTML = `<div class="pill">Question</div>
+                 <h2 style="margin:10px 0 6px 0; font-size:1.15rem;">${escapeHtml(n.title)}</h2>
+                 <div class="small">${n.question}</div>`;
+  box.appendChild(h);
+
+  if (n.help && n.help.length) {
+    const d = document.createElement("details");
+    const s = document.createElement("summary");
+    s.textContent = "Help: clarifications & examples";
+    d.appendChild(s);
+
+    const div = document.createElement("div");
+    div.className = "small muted helpBlock";
+    div.innerHTML = n.help.map(item => `<div>${item}</div>`).join("");
+
+    d.appendChild(div);
+    box.appendChild(d);
+  }
+
+  const btnrow = document.createElement("div");
+  btnrow.className = "btnrow";
+
+  n.answers.forEach((a, idx) => {
+    const b = document.createElement("button");
+    if (idx === 0) b.className = "primary";
+    b.textContent = a.label;
+    b.onclick = () => {
+      history.push(id);
+      render(a.next);
+    };
+    btnrow.appendChild(b);
+  });
+
+  box.appendChild(btnrow);
+  nodeArea.appendChild(box);
+}
+
+function renderOutcome(id) {
+  const o = TREE.outcomes[id];
+  const box = document.createElement("div");
+  box.className = "stack";
+
+  const head = document.createElement("div");
+  head.innerHTML = `<div class="tag">${escapeHtml(o.tag || "Outcome")}</div>
+                    <h2 class="outcomeTitle">${escapeHtml(o.title)}</h2>`;
+  box.appendChild(head);
+
+  (o.body || []).forEach(p => {
+    const para = document.createElement("p");
+    para.className = "small";
+    para.style.margin = "0";
+    para.innerHTML = p;
+    box.appendChild(para);
+  });
+
+  if (o.bullets && o.bullets.length) {
+    const ul = document.createElement("ul");
+    ul.className = "small";
+    o.bullets.forEach(b => {
+      const li = document.createElement("li");
+      li.innerHTML = b;
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+  }
+
+  (o.body2 || []).forEach(p => {
+    const para = document.createElement("p");
+    para.className = "small muted";
+    para.style.margin = "0";
+    para.innerHTML = p;
+    box.appendChild(para);
+  });
+
+  if (o.nextNode) {
+    const btnrow = document.createElement("div");
+    btnrow.className = "btnrow";
+    const b = document.createElement("button");
+    b.className = "primary";
+    b.textContent = "Continue to governance questions";
+    b.onclick = () => {
+      history.push(id);
+      render(o.nextNode);
+    };
+    btnrow.appendChild(b);
+    box.appendChild(btnrow);
+  }
+
+  nodeArea.appendChild(box);
+}
+
+function start() {
+  introCard.style.display = "none";
+  toolCard.style.display = "block";
+  history = [];
+  render(TREE.start);
+}
+
+function back() {
+  if (!history.length) return;
+  const prev = history.pop();
+  render(prev);
+}
+
+function restart() {
+  history = [];
+  render(TREE.start);
+}
+
+startBtn.addEventListener("click", start);
+backBtn.addEventListener("click", back);
+restartBtn.addEventListener("click", restart);
+</script>
+</body>
+</html>
