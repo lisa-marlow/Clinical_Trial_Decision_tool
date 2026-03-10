@@ -1,5 +1,7 @@
 # Clinical Trial Governance Decision Tool
 
+https://lisa-marlow.github.io/Clinical_Trial_Decision_tool/
+
 Decision-support tool to help researchers and administrators identify whether a proposed project is likely to be considered a **clinical trial** and whether **therapeutic goods regulatory considerations** may apply.
 
 This tool provides structured guidance on when a study may involve a therapeutic good and helps flag circumstances where **Research Governance advice** or **TGA regulatory pathways (CTN/CTA)** may need to be considered.
