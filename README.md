@@ -10,6 +10,14 @@ This tool provides structured guidance on when a study may involve a therapeutic
 
 ---
 
+## Version
+
+Version 0.1 — March 2026
+
+Initial release including governance questions relating to **therapeutic goods** and **ARTG status**.
+
+---
+
 ## Purpose
 
 Universities and research institutions frequently receive early enquiries from researchers about whether their project may be a clinical trial and what governance steps may be required.
@@ -147,14 +155,6 @@ The tool currently references:
 - **Clinical Trial Approval (CTA)**
 
 These are relevant only to institutions in Australia.
-
----
-
-## Version
-
-Version 0.1 — March 2026
-
-Initial release including governance questions relating to **therapeutic goods** and **ARTG status**.
 
 ---
 
