@@ -111,33 +111,30 @@ The decision logic can be updated simply by editing the node definitions.
 
 ## How to adapt this tool for other institutions
 
-Institutions wishing to reuse or adapt this tool can typically do so with minimal changes.
+Institutions wishing to reuse or adapt this tool are welcome and can typically do so with minimal changes.
 
-### Institutional contact details
+### Download the tool
 
-Update:
+Click the green **Code** button at the top of this repository and select **Download ZIP**.
 
-`human.ethics@scu.edu.au`
+This will download the entire repository, including the HTML decision tool.
 
-to the appropriate local ethics or research governance contact.
+### Run locally
 
-### Governance links
+After downloading, open:
 
-Replace links to institutional guidance, such as:
+index.html
 
-- ethics application pages
-- governance procedures
-- internal policy documents
+in any web browser. The tool runs entirely in the browser and does not require any installation or external libraries.
 
-### Outcome wording
+Institutions wishing to adapt the tool will typically only need to modify:
 
-Institutions may wish to adjust:
+- contact details (e.g. ethics office email)
+- links to institutional guidance
+- outcome wording
+- regulatory references
 
-- outcome descriptions
-- governance terminology
-- contact instructions
-
-to match local research governance processes.
+The decision logic is defined in the JavaScript decision tree within the HTML file.
 
 ### Regulatory guidance
 
